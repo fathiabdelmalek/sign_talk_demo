@@ -13,6 +13,9 @@ class MainNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
+      backgroundColor: Colors.white,
+      labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+      animationDuration: const Duration(seconds: 1),
       onDestinationSelected: onDestinationSelected,
       selectedIndex: selectedIndex,
       destinations: const <NavigationDestination>[

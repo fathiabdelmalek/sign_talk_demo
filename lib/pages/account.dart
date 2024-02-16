@@ -9,7 +9,7 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Card(
       shadowColor: Colors.transparent,
-      margin: const EdgeInsets.all(8.0),
+      margin: EdgeInsets.all(8.0),
       child: SizedBox.expand(
         child: Center(
           child: Text('Account page'),

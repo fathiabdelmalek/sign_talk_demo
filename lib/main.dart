@@ -28,6 +28,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('TAKALEM Sign Talk Demo'),
@@ -40,11 +43,13 @@ class _MyAppState extends State<MyApp> {
           },
           selectedIndex: pageIndex,
         ),
-        body: <Widget>[
-          const TranslatePage(),
-          const StorePage(),
-          const AccountPage(),
-        ][pageIndex],
+        body: SafeArea(
+          child: <Widget>[
+            const TranslatePage(),
+            const StorePage(),
+            const AccountPage(),
+          ][pageIndex],
+        ),
       ),
     );
   }
