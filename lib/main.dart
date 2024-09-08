@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:takalem_sign_talk_demo/pages/account.dart';
-import 'package:takalem_sign_talk_demo/pages/store.dart';
-import 'package:takalem_sign_talk_demo/pages/translate.dart';
+import 'package:takalem_sign_talk_demo/screens/account.dart';
+import 'package:takalem_sign_talk_demo/screens/store.dart';
+import 'package:takalem_sign_talk_demo/screens/translate.dart';
 import 'package:takalem_sign_talk_demo/widgets/navigation_bar.dart';
 
 void main() {
@@ -27,13 +27,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'TAKALEM Sign Talk Demo',
       theme: ThemeData(
         useMaterial3: true,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('TAKALEM Sign Talk Demo'),
+          title: const Text('TAKALEM Sign Talk'),
         ),
         bottomNavigationBar: MainNav(
           onDestinationSelected: (int index) {

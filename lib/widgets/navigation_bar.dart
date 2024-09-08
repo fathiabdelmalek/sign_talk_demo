@@ -29,7 +29,7 @@ class MainNav extends StatelessWidget {
         ),
         NavigationDestination(
           icon: Icon(Icons.account_circle),
-          label: "Circle",
+          label: "Account",
         ),
       ],
     );

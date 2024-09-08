@@ -1,14 +1,21 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 class InputCard extends StatefulWidget {
-  final SpeechToText speechToText;
+  final TextEditingController textEditingController;
+  final SpeechToText speech;
+  final VoidCallback startListening;
+  final VoidCallback stopListening;
+  final VoidCallback onSend;
 
   const InputCard({
     Key? key,
-    required this.speechToText,
+    required this.textEditingController,
+    required this.speech,
+    required this.startListening,
+    required this.stopListening,
+    required this.onSend,
   }) : super(key: key);
 
   @override
@@ -16,39 +23,8 @@ class InputCard extends StatefulWidget {
 }
 
 class _InputCardState extends State<InputCard> {
-  final TextEditingController _textEditingController = TextEditingController();
   bool _showCameraButton = true;
   bool _showMicButton = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _initSpeech();
-  }
-
-  void _initSpeech() async {
-    final bool isAvailable = await widget.speechToText.initialize();
-    if (isAvailable) {
-      setState(() {});
-    }
-  }
-
-  void _startListening() async {
-    await widget.speechToText.listen(
-      onResult: _onSpeechResult,
-      localeId: "ar",
-    );
-    setState(() {});
-  }
-
-  void _stopListening() async {
-    await widget.speechToText.stop();
-    setState(() {});
-  }
-
-  void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +37,13 @@ class _InputCardState extends State<InputCard> {
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   children: [
                     Expanded(
                       child: TextField(
-                        controller: _textEditingController,
+                        controller: widget.textEditingController,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Type a text to translate',
@@ -96,15 +72,15 @@ class _InputCardState extends State<InputCard> {
             const SizedBox(width: 10),
             if (_showMicButton)
               AvatarGlow(
-                animate: widget.speechToText.isListening,
+                animate: widget.speech.isListening,
                 glowColor: Colors.purple,
                 child: IconButton.filled(
-                  onPressed: widget.speechToText.isNotListening
-                      ? _startListening
-                      : _stopListening,
+                  onPressed: widget.speech.isNotListening
+                      ? widget.startListening
+                      : widget.stopListening,
                   iconSize: 30.0,
                   icon: Icon(
-                    widget.speechToText.isNotListening
+                    widget.speech.isNotListening
                         ? Icons.mic_none
                         : Icons.mic,
                     color: Colors.white,
@@ -114,7 +90,7 @@ class _InputCardState extends State<InputCard> {
             if (!_showMicButton)
               IconButton.filled(
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: widget.onSend,
                 icon: const Icon(Icons.send),
               ),
           ],

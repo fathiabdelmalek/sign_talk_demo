@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
     <application
-        android:label="takalem_sign_talk_demo"
+        android:label="TAKALEM Sign Talk - demo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
