@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:o3d/o3d.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:takalem_sign_talk_demo/widgets/input_card.dart';
@@ -64,22 +65,20 @@ class _TranslatePageState extends State<TranslatePage> {
               style: const TextStyle(fontSize: 18.0),
             ),
           ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                _lastWords,
-                style: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w300,
-                ),
+          Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              _lastWords,
+              style: const TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w300,
               ),
             ),
           ),
           Container(
             child: speech.isNotListening && _confidence > 0
                 ? Padding(
-                    padding: const EdgeInsets.only(bottom: 100.0),
+                    padding: const EdgeInsets.only(bottom: 8.0),
                     child: Text(
                       'Confidence: ${(_confidence * 100).toStringAsFixed(1)}%',
                       style: const TextStyle(
@@ -91,6 +90,22 @@ class _TranslatePageState extends State<TranslatePage> {
                 : const Padding(
                     padding: EdgeInsets.only(bottom: 100.0),
                   ),
+          ),
+          const Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+              // child: Placeholder(),
+              // child: O3D(
+              //   src: "assets/avatar.glb",
+              // ),
+              child: O3D.asset(
+                src: "assets/avatar.glb",
+              ),
+              // child: O3D.network(
+              //   src:
+              //       "https://models.readyplayer.me/66ec8f258812191462c08bb4.glb",
+              // ),
+            ),
           ),
           InputCard(
             textEditingController: _textEditingController,
